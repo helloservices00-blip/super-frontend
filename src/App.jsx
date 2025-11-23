@@ -6,6 +6,7 @@ import Profile from './pages/Profile';
 import Login from './pages/Login';
 import Checkout from './pages/Checkout';
 import ProtectedRoute from './components/ProtectedRoute';
+import Signup from "./pages/Signup";
 
 // Admin
 import Dashboard from './admin/Dashboard';
@@ -29,6 +30,7 @@ function App() {
       <Route path="/admin/shops" element={<ProtectedRoute><ShopsAdmin /></ProtectedRoute>} />
       <Route path="/admin/categories" element={<ProtectedRoute><CategoriesAdmin /></ProtectedRoute>} />
       <Route path="/admin/products" element={<ProtectedRoute><ProductsAdmin /></ProtectedRoute>} />
+      <Route path="/signup" element={<Signup />} />
       <Route path="/admin/orders" element={<ProtectedRoute><OrdersAdmin /></ProtectedRoute>} />
     </Routes>
   );
