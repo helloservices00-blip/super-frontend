@@ -1,36 +1,44 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import axios from "axios";
 
-const API = import.meta.env.VITE_API_URL || "http://localhost:5000";
+const API = import.meta.env.VITE_API_URL || "https://super-backend-bzin.onrender.com";
 
 export default function Signup() {
   const [form, setForm] = useState({ name: "", email: "", password: "" });
-  const [msg, setMsg] = useState("");
-
-  const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
-  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      const res = await axios.post(`${API}/api/auth/register`, form);
-      setMsg("Signup successful! Please login.");
-    } catch (err) {
-      setMsg("Signup failed");
-    }
+    await axios.post(`${API}/api/auth/signup`, form)
+      .then(() => alert("Signup successful"))
+      .catch((err) => alert(err.response?.data?.message || "Error"));
   };
 
   return (
-    <div>
-      <h2>Create Account</h2>
+    <div style={{ padding: 20 }}>
+      <h2>Signup</h2>
+
       <form onSubmit={handleSubmit}>
-        <input name="name" placeholder="Name" onChange={handleChange} required />
-        <input name="email" placeholder="Email" onChange={handleChange} required />
-        <input name="password" type="password" placeholder="Password" onChange={handleChange} required />
-        <button type="submit">Sign Up</button>
+        <input
+          type="text"
+          placeholder="Name"
+          onChange={(e) => setForm({ ...form, name: e.target.value })}
+        /><br />
+
+        <input
+          type="email"
+          placeholder="Email"
+          onChange={(e) => setForm({ ...form, email: e.target.value })}
+        /><br />
+
+        <input
+          type="password"
+          placeholder="Password"
+          onChange={(e) => setForm({ ...form, password: e.target.value })}
+        /><br />
+
+        <button type="submit">Signup</button>
       </form>
-      <p>{msg}</p>
     </div>
   );
 }
+p
