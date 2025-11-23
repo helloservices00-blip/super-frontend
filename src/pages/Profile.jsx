@@ -1,18 +1,17 @@
-import React, { useContext } from 'react';
-import { AuthContext } from '../context/AuthContext';
+import { Link } from "react-router-dom";
 
 export default function Profile() {
-  const { user, logout } = useContext(AuthContext);
-
-  if (!user) return <p>Loading profile...</p>;
-
   return (
     <div>
-      <h2>Profile</h2>
-      <p>Name: {user.name}</p>
-      <p>Email: {user.email}</p>
-      {user.isAdmin && <p><strong>Admin User</strong></p>}
-      <button onClick={logout} style={{ marginTop: '10px', padding: '5px 15px' }}>Logout</button>
+      <h2>Please Login</h2>
+      <Link to="/login">
+        <button>Login</button>
+      </Link>
+
+      <p>Don't have an account?</p>
+      <Link to="/signup">
+        <button>Create Account</button>
+      </Link>
     </div>
   );
 }
